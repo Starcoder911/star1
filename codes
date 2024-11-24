@@ -1,0 +1,263 @@
+import math  as  m
+def Sarvesh(fun, x1, x2, acc,  maxitr):
+        while fun(x1) * fun(x2) > 0:
+                print("WRONG  INITIAL GUESS")
+                x1  = float(input("Enter  the new value of  x1: "))
+                x2  = float(input("Enter  the new value of  x2: "))
+        for i in  range(maxitr):
+                x0  = (x1 + x2) / 2
+                if  fun(x0) * fun(x1) < 0:
+                        x1  = x1
+                        x2  = x0
+                elif  fun(x0) * fun(x1) > 0:
+                        x1  = x0
+                        x2  = x2
+                else:
+                        break
+                if  abs(fun(x0))  <=  acc:
+                        break
+        print("The  root  of  the given function  is:", x0)
+Sarvesh(lambda x:m.sin(x)  + m.cos(x),17,20,0.000001,3)
+
+Newton Rapshon
+import math  as  m
+ def Sarvesh(fun,dfun,ddfun,x1,acc,maxitr):
+    while abs(fun(x1)*ddfun(x1)/(dfun(x1))**2)  > 1:
+        print("Wrong  inital  guess")
+        x1= float(input("Enter  the new value of  x1: "))
+    for itr in  range (maxitr):
+        x0  = x1  - fun(x1)/dfun(x1)
+        if  abs(x1-x0)< acc:
+            break;
+        x1=x0
+    print("The  root  is  ",x0)
+Sarvesh(lambda  x:  m.exp(x)-m.sin(x),
+                    lambda  x:  m.exp(x)- m.cos(x),
+                    lambda  x:  m.exp(x)  + m.sin(x),
+                    5,0.00001,100)
+
+gauss elimination
+import  numpy as  np
+def Sarvesh(a,d):
+    a = np.array(a, dtype = float)
+    d = np.array(d, dtype = float)
+    n = len(d)
+    for i in  range (0, n,  1):
+        for k in  range (i+1, n,  1):
+            f = a[k,i]  / a[i,i]
+            for j in  range (0, n):
+                a[k,j]  = a[k,j]  - f * a[i,j]
+            d[k]  = d[k]  - f * d[i]
+    print(a)
+    print(d)
+    x = np.zeros(n)
+    print(x)
+    for i in  range (n-1, -1, -1):
+        temp  = 0
+        for j in  range (i+1, n,  1):
+            temp  = temp  + a[i,j]  * x[j]
+        x[i]  = (d[i] - temp) / a[i,i]
+    print("Answer = ",  x)
+Sarvesh(np.array([[4,1,2,3],[3,4,1,2],[2,3,4,1],[1,2,3,4]]),np.array([[40],[40],[40],[40]]))
+
+gauss seidal
+import	numpy	as	np
+a	=	np.array([[5,1,-1],[1,8,2],[2,3,10]])
+d	=	np.array([[4.7],[15.7],[27.1]])
+a	=	np.array(a,dtype=float)
+d	=	np.array(d,dtype=float).flatten()
+n=	len(d)
+x=	np.zeros(n)
+maxitr	=	10
+for	itr	in	range	(maxitr):
+		for	i	in	range(0,n,1):
+				temp	=	0
+				for	j	in	range(0,n,1):
+						if	i!=j:
+							temp	=	temp	+	a[i,j]*x[j]
+				x[i]	=	(d[i]	-	temp)/a[i,i]
+print(x)
+cuver fitting straight curve 
+import  numpy as  np
+def Sarvesh(x,y):
+        x = x.astype(float)
+        y = y.astype(float)
+        a = np.array([[len(x),sum(x)],[sum(x),sum(x*x)]])
+        d = np.array([[sum(y)],[sum(x*y)]])
+        b = np.linalg.solve(a,d)
+        print("output")
+        print("y  = %.4f  + (%.4f)  * x"  %(b[0],b[1]))
+Sarvesh(np.array([10,20,30,40,50,60]),np.array([14.3575,16.6517,16.7353,17.6762,18.5128,104.8]))
+curve fitting parabola
+import  numpy as  np
+def Sarvesh_plcf(x,y):
+    x = x.astype(float)
+    y = y.astype(float)
+    a = np.array([[len(x),sum(x),sum(x*x)],
+                                [sum(x),sum(x*x),sum(x*x*x)],
+                                [sum(x*x),sum(x*x*x),sum(x*x*x*x)]])
+    d = np.array([[sum(y)],
+                                [sum(x*y)],
+                                [sum(x*x*y)]])
+    b = np.linalg.solve(a,d)
+    print("y  = %.4f  + (%.4f)  * x + (%.4f)  * x ^ 2"%(b[0],b[1],b[2]))
+Sarvesh_plcf(np.array([1,2,3,4,5]),np.array([12,4,1,2,7]))
+power equation
+import numpy as  np
+def Sarvesh_cfpe2(t,N):
+ N = np.array(N,dtype=float)
+ X = np.array(t,dtype=float)
+ Y = np.log(N)
+ A = np.array([[len(X),sum(X)],[sum(X),sum(X*X)]])
+ C = np.array([[sum(Y)],[sum(X*Y)]])
+ B = np.linalg.solve(A,C)
+ a0  = B[0]
+ a1  = B[1]
+ alpha = np.exp(a0)
+ beta  = np.exp(a1)
+ print("N  = %4f * %4f ^ t"%(alpha,beta))
+Sarvesh_cfpe2(np.array([2000,3000,4000,5000,6000]),np.array([15,15.5,16,17,18]))
+lagrenges interpol
+import  numpy as  np
+def Sarvesh_li(x,y,xr):
+        x = x.astype(float)
+        y = y.astype(float)
+        n = len(x)
+        yr  = 0
+        for i in  range(n):
+                L = 1
+                for j in  range(n):
+                        if  i !=j:
+                          L = L*(xr-x[j])/(x[i]-x[j])
+                yr  = yr  + y[i]  * L
+        print("y  at  x = %.4f  is  equal to  %.4f"%(xr,yr))
+Sarvesh_li(np.array([2.10,2.50,3.10,3.50]),np.array([5.14,6.78,10.29,13.56]),2.7)
+
+newtons forward diff
+import  numpy as  np
+import  math  as  m
+def Sarvesh_ndfi(x, y,  xr):
+        x = np.array(x, dtype=float)
+        y = np.array(y, dtype=float)
+        n = len(x)
+        delta = np.zeros((n - 1,  n - 1))
+        for j in  range(n - 1):
+                for i in  range((n  - 1)  - j):
+                        if  j ==  0:
+                                delta[i,  j]  = y[i + 1]  - y[i]
+                        else:
+                                delta[i,  j]  = delta[i + 1,  j - 1]  - delta[i,  j - 1]
+        h = x[1]  - x[0]    #
+        u = (xr - x[0]) / h
+        term  = 0
+        mult  = 1
+        for j in  range(n - 1):
+                mult  *=  (u  - j)
+                term  +=  delta[0,  j]  / m.factorial(j + 1)  * mult
+        yr  = y[0]  + term
+        print("Answer =", yr)
+Sarvesh_ndfi(np.array([0,1,2,3,4,]),np.array([1,5,25,100,250]),0.5)
+
+trapezodial rule 
+import math as m
+def Sarvesh_tr(fun,x0,xn,n):
+  h = (xn - x0) / n
+  y0 = fun(x0)
+  yn = fun(xn)
+  yr = 0
+  for i in range (1,n):
+    yr = yr + fun(x0 + i * h)
+  A = 1/2 * h * (y0 + yn + 2 * yr)
+  print("Area = ", A)
+
+
+Sarvesh_tr(lambda x: 1/(1+x**2),0,6,6)
+
+simpson 13 
+import math as m
+def Sarvesh_s13(fun,x0,xn,n):
+  h = (xn - x0) / n
+  y0 = fun(x0)
+  yn = fun(xn)
+  yodd = 0
+  yeven = 0
+  for i in range (1,n,2):
+    yodd = yodd + fun(x0 + i * h)
+  for j in range (2,n-1,2):
+    yeven = yeven + fun(x0 + j * h)
+
+  A = 1/3 * h * (y0 + yn + 4 * yodd + 2 * yeven)
+  print("Area = ", A)
+
+
+
+Sarvesh_s13(lambda x: 1/(1+x**2),0,6,6)
+
+simpson 38
+import math as m
+def Sarvesh_s38(fun,x0,xn,n):
+  h = (xn - x0) / n
+  y0 = fun(x0)
+  yn = fun(xn)
+  ym3 = 0
+  yr = 0
+  for i in range (3,n-2,3):
+    ym3 = ym3 + fun(x0 + i * h)
+  for j in range (1,n,1):
+    yr = yr + fun(x0 + j * h)
+  yr = yr - ym3
+
+  A = 3/8 * h * (y0 + yn + 3 * yr + 2 * ym3)
+  print("Area = ", A)
+
+
+
+Sarvesh_s38(lambda x: 1/(1+x**2),0,6,6)
+
+eulers method 
+import math as m
+def Sarvesh_em(fun,x0,y0,xn,n):
+  h = (xn - x0) / n
+  for i in range (1,n+1):
+    ynew = y0 + h * fun(x0,y0)
+    x0 = x0 + h
+    y0 = ynew
+  print("xn = ", xn," ; yn = ", ynew)
+
+
+
+Sarvesh_em(lambda x,y: x+y,0,1,1,5)
+
+runge kutta
+import math as m
+def Sarvesh_rk2(fun,x0,y0,xn,n):
+  h = (xn - x0) / n
+  for i in range (1,n+1):
+    k1 = h * fun(x0,y0)
+    k2 = h * fun(x0+h,y0+k1)
+    ynew = y0 + 1/2 * (k1+k2)
+    x0 = x0 + h
+    y0 = ynew
+
+  print("xn = ", xn," ; yn = ", ynew)
+
+
+Sarvesh_rk2(lambda x,y: x+y,0,1,1,5)
+
+runge kutta 4
+import math as m
+def Sarvesh_rk4(fun,x0,y0,xn,n):
+  h = (xn - x0) / n
+  for i in range (1,n+1):
+    k1 = h * fun(x0,y0)
+    k2 = h * fun(x0+h/2,y0+k1/2)
+    k3 = h * fun(x0+h/2,y0+k2/2)
+    k4 = h * fun(x0+h,y0+k3)
+    ynew = y0 + 1/6 * (k1+2*k2+2*k3+k4)
+    x0 = x0 + h
+    y0 = ynew
+
+  print("xn = ", xn," ; yn = ", ynew)
+
+
+Sarvesh_rk4(lambda x,y: x+y,0,1,1,5)
