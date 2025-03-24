@@ -1,0 +1,22 @@
+
+import numpy as np import matplotlib.pyplot as plt
+def allcases(): plt.clf()
+wn
+5
+zeta =
+[0.1, 0.5, 0.75, 0.85, 0.99]
+x0
+= 0
+v0 = 60
+tO
+=0
+tE＝6
+t = np.arange (t0, tf, 0.001)
+for i in range (len (zeta) ) :
+wd = np.sqrt (1 - zeta (i]**2) * wn
+x = п. exp (-
+zeta(i] * wn * t) * (((zeta[i] * wn * x0 + v0) / wd) * np.sin(wd + t) + x0 * пр.с os (wd * t) )
+plt.plot(t, x, label=f'zeta = (zeta(i])')
+plt.xlabel ('t(s) ') plt. ylabel ('x(t)')
+plt. title('Response of single degree mass damper system') plt. legend (loc='upper right')
+plt.show ()
