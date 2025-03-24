@@ -17,3 +17,16 @@ x = Al * np. sin (wn * t) + A2 * np. cos (wn * t) + A3 * t
 * np. cos (wdr * t)
 title = 'Example of resonance phenomenon'
 else:
+Al = vO
+/ wn
+A2 = x0
+- (£0 / (wn ** 2 - wdr ** 2))
+A3 = f0 /
+(wn
+** 2 - wdr ** 2)
+title = 'Example of beat phenomenon'
+* = A1 * np.sin (wn * t) + A2 * np. Cos (wn * t) + A3 + np. cos (wdr * t)
+plt. plot (t, x)
+plt. title(title)
+plt. xlabel ('Time, seconds*)
+plt. show ( )
