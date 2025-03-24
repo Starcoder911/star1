@@ -1,0 +1,19 @@
+import numpy as np import matplotlib.pyplot as plt
+- x0 = 0
+v0 = 0
+W.一
+3
+war
+= float (input ('Enter the driving frequency='))
+f0 = 6
+tf = 40
+t = np.arange (0, tf + tf / 1000, tf / 1000)
+if wdr
+== wn:
+A1 = v0 / wn
+A2 = x0
+A3 = f0 / 2 * wn
+x = Al * np. sin (wn * t) + A2 * np. cos (wn * t) + A3 * t
+* np. cos (wdr * t)
+title = 'Example of resonance phenomenon'
+else:
