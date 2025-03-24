@@ -1,0 +1,13 @@
+import numpy as np import matplotlib.pyplot as plt
+def resp() :
+freqr = np.arange (0, 2.01, 0.01)
+zeta = np.arange (0, 2.01, 0.2)
+for i in range (len (zeta) ) :
+x = fregr**2 / np.sgrt((1 - fregrt+2)**2+ (2 * zetafi * frear)*+21
+plt.plot (fregr, x, linewidth-2, label=f'zeta = (zeta(i) : .1f)*)
+plt.xlabel ('Frequency Ratio')
+plt. ylabel (' (X*m) / (m0*e) ^ )
+plt.title('Response of single degree mass damper system for different damping
+factor')
+plt. legend ()
+plt.show ()
